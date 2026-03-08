@@ -1,32 +1,72 @@
 import Patient from "../models/Patient.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
-export const getPatients = async (req, res) => {
-  const patients = await Patient.find().sort({ lastName: 1, firstName: 1 });
+// GET all patients
+export const getPatients = asyncHandler(async (req, res) => {
+  const { search } = req.query;
+
+  const filter = search
+    ? {
+        $or: [
+          { firstName: { $regex: search, $options: "i" } },
+          { lastName: { $regex: search, $options: "i" } },
+          { email: { $regex: search, $options: "i" } },
+        ],
+      }
+    : {};
+
+  const patients = await Patient.find(filter).sort({ lastName: 1, firstName: 1 });
   res.json(patients);
-};
+});
 
-export const getPatientById = async (req, res) => {
+
+// GET one patient
+export const getPatientById = asyncHandler(async (req, res) => {
   const patient = await Patient.findById(req.params.id);
-  if (!patient) return res.status(404).json({ message: "Patient not found" });
+
+  if (!patient) {
+    res.status(404);
+    throw new Error("Patient not found");
+  }
+
   res.json(patient);
-};
+});
 
-export const createPatient = async (req, res) => {
-  const created = await Patient.create(req.body);
-  res.status(201).json(created);
-};
 
-export const updatePatient = async (req, res) => {
-  const updated = await Patient.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
-  if (!updated) return res.status(404).json({ message: "Patient not found" });
-  res.json(updated);
-};
+// CREATE patient
+export const createPatient = asyncHandler(async (req, res) => {
+  const patient = new Patient(req.body);
+  const savedPatient = await patient.save();
 
-export const deletePatient = async (req, res) => {
-  const deleted = await Patient.findByIdAndDelete(req.params.id);
-  if (!deleted) return res.status(404).json({ message: "Patient not found" });
-  res.json({ message: "Patient deleted" });
-};
+  res.status(201).json(savedPatient);
+});
+
+
+// UPDATE patient
+export const updatePatient = asyncHandler(async (req, res) => {
+  const patient = await Patient.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true, runValidators: true }
+  );
+
+  if (!patient) {
+    res.status(404);
+    throw new Error("Patient not found");
+  }
+
+  res.json(patient);
+});
+
+
+// DELETE patient
+export const deletePatient = asyncHandler(async (req, res) => {
+  const patient = await Patient.findByIdAndDelete(req.params.id);
+
+  if (!patient) {
+    res.status(404);
+    throw new Error("Patient not found");
+  }
+
+  res.json({ message: "Patient deleted successfully" });
+});

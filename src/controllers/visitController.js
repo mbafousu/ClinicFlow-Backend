@@ -1,15 +1,26 @@
 import Visit from "../models/Visit.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
-export const getVisits = async (req, res) => {
+export const getVisits = asyncHandler(async (req, res) => {
   const filter = {};
+
   if (req.query.patientId) filter.patient = req.query.patientId;
+  if (req.query.status) filter.status = req.query.status;
+
+  // Optional: date range filtering
+  if (req.query.from || req.query.to) {
+    filter.visitDate = {};
+    if (req.query.from) filter.visitDate.$gte = new Date(req.query.from);
+    if (req.query.to) filter.visitDate.$lte = new Date(req.query.to);
+  }
 
   const visits = await Visit.find(filter)
     .populate("patient", "firstName lastName email")
     .sort({ visitDate: -1 });
 
   res.json(visits);
-};
+});
+
 
 export const getVisitById = async (req, res) => {
   const visit = await Visit.findById(req.params.id).populate(
