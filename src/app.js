@@ -3,6 +3,7 @@ import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
 import patientRoutes from "./routes/patientRoutes.js";
 import visitRoutes from "./routes/visitRoutes.js";
+import drugRoutes from "./routes/drugRoutes.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/patients", patientRoutes);
 app.use("/api/visits", visitRoutes);
+app.use("/api/drugs", drugRoutes);
 
 // Health check
 app.get("/", (req, res) => {
