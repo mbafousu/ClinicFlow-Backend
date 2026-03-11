@@ -30,8 +30,8 @@ const seed = async () => {
   // 3) Create demo patients
   const patients = await Patient.insertMany([
     {
-      firstName: "John",
-      lastName: "Doe",
+      firstName: "Amel",
+      lastName: "king",
       email: "john@demo.com",
       phone: "555-1111",
     },
@@ -47,6 +47,31 @@ const seed = async () => {
       email: "kevin@demo.com",
       phone: "555-3333",
     },
+    {
+    firstName: "karia",
+    lastName: "Lopez",
+    email: "karia@demo.com",
+    phone: "555-4444",
+  },
+  {
+    firstName: "Gilles",
+    lastName: "Smith",
+    email: "gilles@demo.com",
+    phone: "555-5555",
+  },
+  {
+    firstName: "Sarah",
+    lastName: "Johnson",
+    email: "sarah@demo.com",
+    phone: "555-666",
+  },
+  {
+    firstName: "Michael",
+    lastName: "Brown",
+    email: "michael@demo.com",
+    phone: "555-777",
+  },
+
   ]);
 
   // 4) Create demo visits
