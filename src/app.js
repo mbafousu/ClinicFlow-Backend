@@ -7,11 +7,15 @@ import drugRoutes from "./routes/drugRoutes.js";
 import appointmentRoutes from "./routes/appointmentRoutes.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 
-
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Routes
@@ -23,10 +27,10 @@ app.use("/api/appointments", appointmentRoutes);
 
 // Health check
 app.get("/", (req, res) => {
-  res.json({ message: "ClinicFlow API running " });
+  res.json({ message: "ClinicFlow API running" });
 });
 
-// Error handler
+// 404 handler
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
