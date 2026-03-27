@@ -39,7 +39,7 @@ npm install nodemon --save-dev
 
 ## Installation
 ### Clone the repository
-- git clone https://github.com/YOUR_USERNAME/CinicFlow-Backend.git
+- https://github.com/mbafousu/ClinicFlow-Backend.git
 - Navigate to the project: cd ClinicFlow Backend
 ### Install dependencies and Start the server
 - npm install
