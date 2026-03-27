@@ -2,7 +2,7 @@
   "name": "clinicflow-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server.js",
@@ -11,16 +11,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mbafousu/CinicFlow-Backend.git"
+    "url": "git+https://github.com/mbafousu/ClinicFlow-Backend.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/mbafousu/CinicFlow-Backend/issues"
+    "url": "https://github.com/mbafousu/ClinicFlow-Backend/issues"
   },
-  "homepage": "https://github.com/mbafousu/CinicFlow-Backend#readme",
+  "homepage": "https://github.com/mbafousu/ClinicFlow-Backend#readme",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
