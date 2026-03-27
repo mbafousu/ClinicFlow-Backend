@@ -57,7 +57,6 @@ GET /api/drugs?search=medication_name
 - REST API Architecture
 
 ## Environment Variables
-```env
 PORT=3001
 MONGO_URI=your_connection_string
 JWT_SECRET=your_secret
