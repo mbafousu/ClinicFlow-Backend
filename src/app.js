@@ -5,6 +5,7 @@ import patientRoutes from "./routes/patientRoutes.js";
 import visitRoutes from "./routes/visitRoutes.js";
 import drugRoutes from "./routes/drugRoutes.js";
 import appointmentRoutes from "./routes/appointmentRoutes.js";
+import bookingRequestRoutes from "./routes/bookingRequestRoutes.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 
 const app = express();
@@ -24,6 +25,7 @@ app.use("/api/patients", patientRoutes);
 app.use("/api/visits", visitRoutes);
 app.use("/api/drugs", drugRoutes);
 app.use("/api/appointments", appointmentRoutes);
+app.use("/api/booking-requests", bookingRequestRoutes);
 
 // Health check
 app.get("/", (req, res) => {
